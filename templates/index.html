@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block  title %} Главная страница {% endblock %}
+
+{% block main %}
+    <div class="slogan">
+        <h1>Найди Свою Любовь</h1>
+        <p>Создайте анкету и найдите людей, которые разделяют ваши интересы</p>
+        <button type="button" onclick="location.href='/reg'">Присоединиться сейчас</button>
+    </div>
+
+    <div class="inner">
+    <div class="description">
+        <div class="description-img">
+        <img src="{{url_for('static', filename = 'images/main-description.jpg')}}" alt="" />
+        </div>
+        <div class="description-text">
+        <h2>Персональный подход</h2>
+        <p>Только персонализированые совпадения для потенциальных партнеров</p>
+        <h2>Местные знакомства</h2>
+        <p>Знакомтесь с одинокими людьми именно в вашем районе</p>
+        <h2>Совместимость</h2>
+        <p>Найдите пару на основе совпадения ваших интересов и ценностей</p>
+        </div>
+    </div>
+    <div class="join-us">
+        <div class="join-text">
+        <h2>Найди свою идеальную пару сегодня</h2>
+        <p>Присоединяйся к нашему сообществу и начни свой путь к поиску любви и компании</p>
+        </div>
+        <div class="join-btn">
+        <form action="login.html">
+            <button type="button" onclick="location.href='/reg'">Присоединиться сейчас</button>
+        </form> 
+        </div>
+    </div>
+
+{% endblock %}

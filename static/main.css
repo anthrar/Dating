@@ -1,0 +1,424 @@
+/* Silver Wings */
+
+body {
+    background: #fff;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    line-height: 160%;
+    color: #261924;
+}
+
+h1 {
+    font-size: 54px;
+    font-family: "Advent Pro", sans-serif;
+    font-weight: 500;
+    text-align: center;
+}
+
+h2 {
+    font-size: 32px;
+    font-family: "Advent Pro", sans-serif;
+    font-weight: 400;
+}
+
+a {
+    color: #261924;
+    text-decoration: none;
+}
+
+a:hover {
+    
+    color: #db2a78;
+}
+
+button {
+    background-color: #e63382;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 20px 50px;
+    font-weight: 500;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #f03688;
+}
+
+.input-label {
+    display: block;
+
+}
+
+.input {
+    border: 0;
+    border-bottom: 2px solid #ccc7d6;
+    margin: 20px 0;
+    padding: 5px 20px;
+    font-size: 16px;
+}
+
+.input-aboutme {
+    border: 2px solid #ccc7d6;
+    margin: 20px 0 30px;
+    padding: 5px;
+    font-size: 16px;
+    width: 85%;
+}
+
+.input-title {
+    width: 180px;
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    margin-top: 20px;
+}
+
+.radio-set {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.radio-container {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.radio-label {
+    margin: 0 30px 0 0;
+}
+
+header {
+    background: #fff;
+    font-size: 20px;
+    position: sticky;
+    padding: 0 30px;
+    top: 0;
+}
+
+.top-logo-link {
+    display:inline-block;
+    width: 400px;
+}
+
+.logo-img {
+    width: 160px;
+}
+
+.logo-link, .logo-text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.top-menu {
+    display:inline-block;
+    width: calc(100% - 410px);
+    text-align: right;
+}
+
+.top-menu a {
+    padding: 0 0 0 40px;
+}
+
+footer {
+    border-top: 2px solid #ccc7d6;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+footer a, footer span {
+    color: #4f4861;
+    vertical-align: top;
+    margin: -2px 0 0 10px;
+    display: inline-block;
+}
+
+.contact-us {
+    display: inline-block;
+    height: 30px;
+    margin: 0 50px 70px;
+}
+
+.logo-grey {
+    width: 90px;
+}
+
+.copyright {
+    margin: 10px 0 0 0;
+}
+.developed-by {
+    align-self: right;
+    display: block;
+    color: rgb(151, 19, 151);
+    font-size: smaller
+}
+
+.greeting {
+    color: #db2a78;
+}
+
+.inner {
+    max-width: 1400px;
+    margin: 80px auto;
+    min-height: 70vh;
+}
+
+
+
+/* Главная страница */
+
+.slogan {
+    width: 100%;
+    min-height: 100vh;
+    text-align: center;
+    padding: 80px 0;
+    background-image: url("/static/images/main-bg.jpg");
+    background-position: center;
+    font-size: 22px;
+}
+
+.slogan p {
+    margin: 50px 0;
+}
+
+.description {
+    margin: 100px 0;
+}
+
+.description-img, .description-text {
+    display: inline-block;
+    width: calc(50% - 40px);    
+    vertical-align: middle;
+}
+
+.description-img img {
+    width: 100%;
+}
+
+.description-text {
+    padding: 0 30px;
+}
+
+.join-us {
+    background-image:url("/static/images/join-us-bg.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 70px 100px;
+}
+
+.join-text, .join-btn {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.join-text {
+    width: 60%;
+}
+
+.join-btn {
+    width: calc(40% - 10px);
+    text-align: right;
+}
+
+.support-outer {
+    text-align: center;
+    margin: 150px 0 50px;
+}
+
+/* Анкета */
+
+.form-outer {
+    margin: 100px 0;
+}
+
+.user-photo-outer {
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+    margin-left: 9%;
+}
+.form-inner {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+}
+
+.user-photo-inner {
+    margin-top: 50px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid #ccc7d6;
+    border-radius: 20px;
+    background-image: url("/static/images/user-photo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40%;
+
+}
+
+.user-photo-inner img {
+    border-radius: 20px;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+}
+
+
+.form-send {
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* Логин */
+
+.or {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.login-outer, .registration-outer {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 50px;
+    width: calc(50% - 300px);
+}
+
+.login-title {
+    text-align: left;
+    display: block;
+    width: 100%;
+}
+
+.login-buton {
+    margin: 50px 0;
+}
+
+.login-input {
+    border: 0;
+    border-bottom: 2px solid #ccc7d6;
+    margin: 20px 0;
+    padding: 5px 20px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.img-center img {
+    width: 60%;
+}
+
+/* Поиск */
+
+.search-form-outer {
+    text-align: center;
+    margin: 0 0 40px 0;
+}
+
+.search-label-name {
+    display: inline-block;
+    margin: 0 0 30px 0;
+}
+
+.search-title {
+    width: 120px;
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.search-button {
+    display: inline-block;
+    margin-left: 50px;
+}
+
+.prev, .next {
+    display: inline-block;
+    width: 40px;
+    vertical-align: top;
+    margin-top: 15%;
+    
+}
+
+.prev img, .next img {
+    width: 100%;
+}
+
+.search-result-inner {
+    display: inline-block;
+    width: calc(100% - 100px);
+    text-align: center;
+}
+
+.search-result {
+    display: inline-block;
+    width: calc(33% - 40px);
+    vertical-align: top;   
+}
+
+.search-result:first-child {
+    margin-right: 30px;
+}
+
+.search-result:last-child {
+    margin-left: 30px;
+}
+
+.search-result:hover {
+    color: #261924;
+}
+
+.search-result img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.search-result-description {
+    text-align: left;
+}
+
+.error {
+    color: red;
+    font-size: smaller;
+}
+
+.user-photo-upload {
+    margin: 40px 30px;
+}
+
+input[type="file"] {
+    display: none;
+}
+  
+.custom-file-upload {
+    cursor: pointer;
+
+    background-color: #e63382;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 20px 50px;
+    font-weight: 500;
+
+}
+
+.deleteUser {
+    text-align: center;
+    margin: 50px 0; 
+    color: #f11e7dd0;
+}
+.deleteUser a {
+    color: blueviolet;
+    font-style: italic;
+}

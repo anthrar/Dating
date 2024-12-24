@@ -1,0 +1,65 @@
+<!-- Silver Wings -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siver Wings {% block title %}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'main.css')}}">
+    <script src="{{url_for('static', filename = 'sw.js')}}"></script>
+    {% block style %} {% endblock %}
+    {% block script %} {% endblock %}
+  </head>
+<body>
+    <header>
+        <div class="top-logo-link">
+          <a href="/" class="logo-link"><img class="logo-img" src="{{url_for('static', filename = 'images/logo-color.png')}}" alt="" /></a>
+          <p class="logo-text">Серебрянные Крылья </br> Знакомства</p>
+        </div>
+        <div class="top-menu">
+          {% if current_user.is_authenticated %}
+          <span class="greeting">Привет, {{current_user.name if current_user.name else current_user.login}}, рады что вы снова с нами! </span>
+          <a href="/search">Поиск</a>
+          <a href="/profile">Профиль</a>
+          <a href="/logout">Выход</a>
+          {% else %}
+          Здравствуй, незнакомец !
+          <a href="/login">Вход/Регистрация</a>
+          {% endif %}
+        </div>
+    </header>
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="contact-us-outer">
+          <div class="contact-us">
+            <img src="{{url_for('static', filename = 'images/mail.png')}}" alt="" />
+            <a href="mailto:info@silverwings.ru">info@silverwings.ru</a>
+          </div>
+          <div class="contact-us">
+            <img src="{{url_for('static', filename = 'images/phone.png')}}" alt="" />
+            <span>+7 111 222 33 44</span>
+          </div>
+          <div class="contact-us">
+            <img src="{{url_for('static', filename = 'images/location.png')}}" alt="" />
+            <span>г. Новосибирск, ул. Новогодняя, д. 34, оф. 36</span>
+          </div>
+        </div>
+        <div class="copyright-outer">
+          <img class="logo-grey" src="{{url_for('static', filename = 'images/logo-grey.png')}}" alt="" />
+          <span class="copyright">&copy; Серебрянные крылья 2024</span>
+        </div>
+        <div class="developed-by">
+        &copy; Красов Павел Андреевич, ФБИ-23, 3 курс, 2024 
+        НГТУ, ФБ, WEB-программирование, Расчётно-графическая работа. 
+        </div>
+      </footer>
+  
+</body>
+</html>

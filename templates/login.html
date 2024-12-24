@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block  title %}Присоединиться или войти{% endblock %}
+
+{% block main %}
+
+<div class="inner" style="text-align: center;">
+    <div class="login-outer">
+      <h2>Войти</h2>
+      <div class="error">{{ error }} </div>
+      <form action="/login" method="post">
+        <label class="input-label">
+          <span class="login-title">Email:</span>
+          <input class="login-input" type="text" name="login" placeholder="Email">
+        </label>
+        <label class="input-label">
+          <span class="login-title">Пароль:</span>
+          <input class="login-input" type="password" name="password" placeholder="Пароль">
+        </label>
+        <button type="submit" class="login-buton">Отправить</button>
+      </form>
+    </div>
+    <div class="or">
+      <h2>или</h2>
+    </div>
+    <div class="registration-outer">
+      <h2>Зарегистрироваться</h2>
+      <div class="error">{{ error_reg }} </div>
+      <form action="/reg" method="post" onsubmit="return checkPassword();">
+        <label class="input-label">
+          <span class="login-title">Email:</span>
+          <input class="login-input" type="text"  name="login" placeholder="Email">
+        </label>
+        <label class="input-label">
+          <span class="login-title">Пароль:</span>
+          <input class="login-input" type="password" name="password"   placeholder="Пароль">
+        </label>
+        <label class="input-label">
+          <span class="login-title">Повторите Пароль:</span>
+          <input class="login-input" type="password" name="password2"   placeholder="Пароль еще раз">
+        </label>
+        <button type="submit" class="login-buton">Отправить</button>
+      </form>
+    </div>
+    <div class="img-center">
+      <img src="images/login.jpg" alt="" />
+    </div>
+  </div>
+
+<script>
+  function checkPassword() {
+    var password = document.getElementById("password").value;
+    var password2 = document.getElementById("password2").value;
+    if (password != password2) {  
+      alert("Пароли не совпадают!");
+      return false;
+    }
+    return true;
+  } 
+</script>
+{% endblock %}

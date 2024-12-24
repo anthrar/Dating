@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block  title %}АДМИН - Поиск пользователей{% endblock %}
+
+{% block main %}
+      <div class="search-result-outer">
+        <div class="prev">
+          <a href="" class="arrow" id="button_back"><img src="/static/images/arrow-left.svg" alt="" /></a>
+        </div>
+        <div class="search-result-inner" id="search-result-inner">
+        </div>
+        <div class="next">
+        <a href="" class="arrow" id="button-forward"><img src="/static/images/arrow-right.svg" alt="" /></a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %} 
+<script>
+function getUserList(page) {
+    //const params = getFormData(document.getElementById('searchform'));
+    const params = {};
+    params['page'] = page;
+
+    const url = '/api/'; 
+    const json = {
+        'jsonrpc': '2.0',
+        'method': 'list',
+        'params': params,
+        'id': Math.round(Math.random()*1000)
+    };
+    fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(json)
+    })
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        const user_list = data.result;
+        const back = data.back;
+        const forward = data.forward;
+
+        const list = document.getElementById('search-result-inner');
+        const backButton = document.getElementById('button_back');
+        const forwardButton = document.getElementById('button-forward');
+
+        backButton.style.display = "none";
+        forwardButton.style.display = "none";
+
+        list.innerHTML = '';
+
+        if (back>0){
+            backButton.onclick = function() {getUserList(back); return false;};
+            backButton.style.display = "block";
+        } else {
+            backButton.onclick = false;
+        }
+        if (forward>0){
+            forwardButton.onclick = function() {getUserList(forward); return false;};
+            forwardButton.style.display = "block";
+        } else {
+            forwardButton.onclick = false;
+
+        }
+        for (let i=0; i<user_list.length; i++) {
+            const user = user_list[i];
+            const userDiv = document.createElement('div');
+            userDiv.className = "search-result";
+            let body = `
+                <img src="{{url_for('static', filename = '/ph/')}}${user.photo}" class="search-result-photo">
+                <h2>
+                    <span class="search-result-name">${user.name}</span>, <span class="search-result-age">${user.age}</span>
+                </h2>
+                <p class="search-result-description">${user.aboutme}</p>
+                `;
+            
+            userDiv.innerHTML = body
+            list.appendChild(userDiv);
+        }
+        if (user_list.length == 0) {
+            const userDiv = document.createElement('div');
+            userDiv.className = "search-result";
+            let body = `
+                <h2 style="color: violet"> Уппс, никого не нашлось. Ничего страшного, поменяйте параметры поиска и все получится!               
+                </h2>
+                <p class="search-result-description"></p>
+                `;
+            
+            userDiv.innerHTML = body
+            list.appendChild(userDiv);
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    getUserList(1);
+});
+</script>
+{% endblock %}

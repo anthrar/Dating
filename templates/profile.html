@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block  title %}Ваш профиль{% endblock %}
+
+{% block main %}
+    <div class="inner">
+      <div class="description">
+        {% if not admin %}
+        <div class="description-text">
+          <h2>Заполняйте анкету</h2>
+          <p>Создайте подробный профиль, описывающий ваши интересы, хобби и что вы ищите в партнере</p>
+          <h2>Найдите свою идеальную пару</h2>
+          <p>Изучите профили других участников, чтобы найти подходящих партнеров, на основе общих интересов и совместимости</p>
+        </div>
+        <div class="description-img">
+          <img src="{{url_for('static', filename = 'images/form.jpg')}}" alt="" />
+        </div>
+        {% endif %}
+        <div class="form-outer">
+          <h1>Анкета</h1>
+          <div class="user-photo-outer">
+            <!--<p>Загрузить фото</p>-->
+            <div class="user-photo-inner">
+              <img src="{{url_for('static', filename = '/ph/')}}{{user.photo}}" id="user-photo"  />
+            </div>
+            <div class="user-photo-upload">
+              <label for="imageInput" class="custom-file-upload">
+                Выберите свою фотографию
+              </label>
+              <input id="imageInput" name="imageInput" type="file" accept="image/*"  onchange="displayImage(this)" />
+            </div>
+          </div>
+          <div class="form-inner">
+            <form id="profileform" onsubmit="updateProfile();return false" >
+
+              {% if admin %}
+              <input type="hidden" name="id" value="{{user.id}}">
+              <label class="input-label">
+                <span class="input-title">Login:</span>
+                <input class="input" type="text" size="40" id="login" name="login" value="{{user.login}}" required>
+                <div class="error" id="name_error"></div>
+              </label>
+              {% endif %}
+
+              <label class="input-label">
+                <span class="input-title">Ваше имя:</span>
+                <input class="input" type="text" size="40" id="name" name="name" value="{{user.name}}" required autofocus>
+                <div class="error" id="name_error"></div>
+              </label>
+              <label class="input-label">
+                <span class="input-title">Возраст:</span>
+                <input class="input" type="number" size="10" id="age" name="age" value="{{user.age}}">
+                <div class="error" id="age_error"></div>
+              </label>
+
+              <fieldset class="radio-set">
+                <span class="input-title" aria-hidden="true">Ваш пол:</span>
+                <div class="radio-container">
+                  <label class="radio-label">
+                    <span class="radio-title">М</span>
+                    <input class="radio" type="radio" id="gender_0" name="gender" value="0">
+                  </label>
+                  <label class="radio-label">
+                    <span class="radio-title">Ж</span>
+                    <input class="radio" type="radio" id="gender_1" name="gender" value="1">
+                  </label>
+                  <div class="error" id="gender_error"></div>
+                </div>
+              </fieldset>
+
+              <fieldset class="radio-set">
+                <span class="input-title" aria-hidden="true">Кого искать?</span>
+                <div class="radio-container">
+                  <label class="radio-label">
+                    <span class="radio-title">М</span>
+                    <input class="radio" type="radio" name="search" value="0" id="search_0">
+                  </label>
+                  <label class="radio-label">
+                    <span class="radio-title">Ж</span>
+                    <input class="radio" type="radio" name="search" value="1" id="search_1">
+                  </label>
+                  <div class="error" id="search_error"></div>
+                </div>
+              </fieldset>
+
+              <fieldset class="radio-set">
+                <span class="input-title" aria-hidden="true">Анкету видно?</span>
+                <div class="radio-container">
+                  <label class="radio-label">
+                    <span class="radio-title">ДА! </span>
+                    <input class="radio" type="radio" name="hidden" value="0" id="hidden_0">
+                  </label>
+                  <label class="radio-label">
+                    <span class="radio-title">нет</span>
+                    <input class="radio" type="radio" name="hidden" value="1" id="hidden_1">
+                  </label>
+                  <div class="error" id="search_error"></div>
+                </div>
+              </fieldset>
+
+              <label class="input-label">
+                <span class="input-title">О себе:</span>
+                <textarea
+                  class="input input-aboutme" 
+                  name="aboutme"
+                  cols="40"
+                  rows="8"
+                  id="aboutme" 
+                >{{user.aboutme}}</textarea>
+                <div class="error" id="aboutme_error"></div>
+
+
+            </label>
+              <div class="form-send">
+                <button type="submit" >Сохранить</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+        
+        <p class="deleteUser"> Если вы нашли себе пару, мы вас поздравляем, и от души желаем счастья, 
+          а анкету можно 
+          <a href="/delete" onclick="return confirm('Вы правда хотите нас покинуть?')" >убрать с сервера</a>.
+        </p>
+      </div>
+
+
+<script>
+selectRadioElement('gender', '{{user['gender']}}');
+selectRadioElement('search', '{{user['search']}}');
+selectRadioElement('hidden', '{{user['hidden']}}');
+
+function updateProfile() {
+    const url = '/api/'; 
+    const params = getFormData(document.getElementById('profileform'));
+    console.log(params);
+    const json = {
+        'jsonrpc': '2.0',
+        'method': 'profile_update',
+        'params': params,
+        'id': Math.round(Math.random()*1000)
+    };
+
+    // clear error messages
+    document.getElementById('name_error').innerHTML = '';
+    document.getElementById('age_error').innerHTML = '';
+    document.getElementById('aboutme_error').innerHTML = '';
+
+    // делаем запрос на сервер
+    fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(json)
+    })
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        const errors = data.errors;
+        console.log(errors, data.result);
+
+        if(data.result===0) {
+            console.log('Профиль обновлен');
+            alert('Профиль обновлен');
+        } else {
+            console.log('ошибки');
+            for (const [key, value] of Object.entries(errors)) {
+                console.log(key, value);
+                document.getElementById(key + '_error').innerHTML = 'Error: ' + value;
+            }
+        }
+
+    });
+}
+async function uploadImage(imageFile, uploadUrl) {
+  await fetch(uploadUrl, { method: "POST", body: new FormData().append('file', imageFile) })
+  .then(response => response.json())
+  .then(function(data) {
+      console.log(data);
+  })
+  .catch(error => console.error(error));
+}
+
+async function uploadFile(image) {
+  let formData = new FormData();           
+  formData.append("file", image);
+  await fetch('/photo', {
+    method: "POST", 
+    body: formData
+  })
+  .then(response => response.json())
+  .then(function(data) {
+    console.log(data);
+    alert('Ваше фото сохранено');
+  })
+  .catch(error => console.error(error));
+}
+
+
+function displayImage(inputElement) {
+  const file = inputElement.files[0];
+  if (file.size > 3 * 1024 * 1024) {
+      alert('Размер фото не должен превышать 3 Мбайт');
+      return;
+  }
+  const imageURL = URL.createObjectURL(file);
+  const img = document.getElementById('user-photo')
+  img.src = imageURL;
+  img.width = 400;
+  img.onload = () => URL.revokeObjectURL(imageURL);
+
+  //inputElement.value = null;
+
+  //uploadImage(file, '/photo')
+  uploadFile(file)
+}
+
+</script>
+
+{% endblock %}

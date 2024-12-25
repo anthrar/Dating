@@ -15,7 +15,7 @@ import json
 
 back = Blueprint('back', __name__ ) 
 
-PHOTO_CATALOG = './static/ph'
+PHOTO_CATALOG = 'static/ph'
 
 # Фунция возвращает список обьектов Users и номера страниц вперед-назад
 # params - словарь с параметрами поиска
@@ -106,13 +106,12 @@ def hideUser(id):
 
 # получаем путь к фотографии
 def pathPhotoToSave(user):
-    photo_path = path.join(PHOTO_CATALOG, user.login + '_1.jpeg')
-    #print( "Photo path: " + photo_path)
-    return photo_path
+    dir_path = path.join(path.dirname(path.realpath(__file__)), PHOTO_CATALOG )
+    full_path_photo = path.join(dir_path, user.login + '_1.jpeg')
+    return full_path_photo
 
 def savePhoto(isthisFile):
     isthisFile.save( pathPhotoToSave( current_user ) )
-    pass
 
 # проверяем существует ли фотография пользователя
 def checkUserPhoto(user):
